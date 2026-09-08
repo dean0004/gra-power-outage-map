@@ -42,6 +42,10 @@ const outages = [
 ];
 
 export default function OutageMap() {
+  const callGRA = () => {
+    window.location.href = "tel:0393698800";
+  };
+
   return (
     <div
       style={{
@@ -62,22 +66,22 @@ export default function OutageMap() {
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street Map">
             <TileLayer
-              attribution="&copy; OpenStreetMap contributors"
+              attribution="OpenStreetMap contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           </LayersControl.BaseLayer>
 
           <LayersControl.BaseLayer name="Satellite">
             <TileLayer
-              attribution="Tiles &copy; Esri"
+              attribution="Tiles by Esri"
               url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
             />
           </LayersControl.BaseLayer>
         </LayersControl>
 
-        {outages.map((outage, index) => (
+        {outages.map((outage) => (
           <Marker
-            key={index}
+            key={outage.suburb}
             position={[outage.lat, outage.lng]}
           >
             <Popup>
@@ -111,9 +115,23 @@ export default function OutageMap() {
                   Customers affected: {outage.customers}
                 </p>
 
-                tel:0393698800
+                <button
+                  type="button"
+                  onClick={callGRA}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    backgroundColor: "#711f32",
+                    color: "#ffffff",
+                    border: "none",
+                    borderRadius: "5px",
+                    padding: "10px 14px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
                   Call GRA
-                </a>
+                </button>
               </div>
             </Popup>
           </Marker>
