@@ -5,7 +5,7 @@ import {
   TileLayer,
   Marker,
   Popup,
-  LayersControl
+  LayersControl,
 } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
@@ -16,29 +16,29 @@ const outages = [
     lat: -37.8136,
     lng: 144.9631,
     customers: 142,
-    type: "Unplanned"
+    type: "Unplanned",
   },
   {
     suburb: "Richmond",
     lat: -37.8237,
     lng: 145.0016,
     customers: 53,
-    type: "Planned"
+    type: "Planned",
   },
   {
     suburb: "Essendon",
     lat: -37.7567,
     lng: 144.9167,
     customers: 88,
-    type: "Unplanned"
+    type: "Unplanned",
   },
   {
     suburb: "Dandenong",
     lat: -37.9875,
     lng: 145.215,
     customers: 201,
-    type: "Planned"
-  }
+    type: "Planned",
+  },
 ];
 
 export default function OutageMap() {
@@ -47,7 +47,7 @@ export default function OutageMap() {
       style={{
         height: "100%",
         minHeight: "650px",
-        width: "100%"
+        width: "100%",
       }}
     >
       <MapContainer
@@ -56,7 +56,7 @@ export default function OutageMap() {
         style={{
           height: "100%",
           minHeight: "650px",
-          width: "100%"
+          width: "100%",
         }}
       >
         <LayersControl position="topright">
@@ -84,12 +84,12 @@ export default function OutageMap() {
               <div
                 style={{
                   minWidth: "190px",
-                  fontFamily: "Arial, sans-serif"
+                  fontFamily: "Arial, sans-serif",
                 }}
               >
                 <strong
                   style={{
-                    fontSize: "16px"
+                    fontSize: "16px",
                   }}
                 >
                   {outage.suburb}
@@ -97,7 +97,7 @@ export default function OutageMap() {
 
                 <p
                   style={{
-                    margin: "8px 0 4px"
+                    margin: "8px 0 4px",
                   }}
                 >
                   {outage.type} outage
@@ -105,7 +105,7 @@ export default function OutageMap() {
 
                 <p
                   style={{
-                    margin: "4px 0 12px"
+                    margin: "4px 0 12px",
                   }}
                 >
                   Customers affected: {outage.customers}
