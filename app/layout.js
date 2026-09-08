@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "GRA Power Outage Map",
   description: "Victoria Power Outage Map - Generator Rental Australia",
