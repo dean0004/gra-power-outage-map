@@ -35,7 +35,7 @@ const outages = [
   {
     suburb: "Dandenong",
     lat: -37.9875,
-    lng: 145.215,
+    lng: 145.2150,
     customers: 201,
     type: "Planned"
   }
@@ -82,43 +82,4 @@ export default function OutageMap() {
           >
             <Popup>
               <div
-                style={{
-                  minWidth: "190px",
-                  fontFamily: "Arial, sans-serif"
-                }}
-              >
-                <strong
-                  style={{
-                    fontSize: "16px"
-                  }}
-                >
-                  {outage.suburb}
-                </strong>
-
-                <p
-                  style={{
-                    margin: "8px 0 4px"
-                  }}
-                >
-                  {outage.type} outage
-                </p>
-
-                <p
-                  style={{
-                    margin: "4px 0 12px"
-                  }}
-                >
-                  Customers affected: {outage.customers}
-                </p>
-
-                tel:0393698800
-                  Call GRA
-                </a>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
-  );
-}
+              
