@@ -1,16 +1,49 @@
 export default function Home() {
   return (
-    <div style={{
-      padding: "50px",
-      fontFamily: "Arial"
-    }}>
-      <h1>Generator Rental Australia</h1>
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#f5f5f5",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          background: "#711f32",
+          color: "white",
+          padding: "30px",
+        }}
+      >
+        <h1>Generator Rental Australia</h1>
 
-      <h2>Victoria Power Outage Map</h2>
+        <p>Victoria Power Outage Map</p>
+      </div>
 
-      <p>
-        If you can see this page, your Next.js deployment is working.
-      </p>
-    </div>
+      <div style={{ padding: "40px" }}>
+        <h2>Power outage monitoring across Victoria</h2>
+
+        <p>
+          This demonstration site will display planned and unplanned power
+          outages across Melbourne and regional Victoria.
+        </p>
+
+        <p>
+          Generator Rental Australia provides temporary power solutions,
+          generator hire, electrical connection services and refuelling support.
+        </p>
+
+        <button
+          style={{
+            background: "#711f32",
+            color: "white",
+            border: "none",
+            padding: "12px 24px",
+            cursor: "pointer",
+          }}
+        >
+          View Generator Fleet
+        </button>
+      </div>
+    </main>
   );
 }
