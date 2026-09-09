@@ -12,6 +12,7 @@ export default function Home() {
   const [visibleOutages, setVisibleOutages] = useState([]);
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
+  const [selectedOutageKey, setSelectedOutageKey] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -131,6 +132,7 @@ export default function Home() {
           <OutageMap
             outages={outages}
             onVisibleOutagesChange={setVisibleOutages}
+            selectedOutageKey={selectedOutageKey}
           />
         </div>
 
@@ -169,7 +171,33 @@ export default function Home() {
           {sidebarOutages.map((outage, index) => (
             <article
               key={outage.outage_id || `${(outage.suburbs || []).join("-")}-${index}`}
-              style={{ padding: "18px 20px", borderBottom: "1px solid #eeeeee" }}
+              role="button"
+              tabIndex={0}
+              onClick={() =>
+                setSelectedOutageKey(
+                  outage.outage_id || `${(outage.suburbs || []).join("-")}-${index}`
+                )
+              }
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setSelectedOutageKey(
+                    outage.outage_id || `${(outage.suburbs || []).join("-")}-${index}`
+                  );
+                }
+              }}
+              style={{
+                padding: "18px 20px",
+                borderBottom: "1px solid #eeeeee",
+                cursor: "pointer",
+                transition: "background 0.15s ease",
+              }}
+              onMouseEnter={(event) => {
+                event.currentTarget.style.background = "#faf7f8";
+              }}
+              onMouseLeave={(event) => {
+                event.currentTarget.style.background = "white";
+              }}
             >
               <div
                 style={{
