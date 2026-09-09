@@ -4,17 +4,14 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* LIVE OUTAGE POLYGONS */
+/* OUTAGE POLYGONS */
+
 .gra-unplanned-outage {
   fill: #ff7a00 !important;
   fill-opacity: 0.10 !important;
   stroke: #ff7a00 !important;
   stroke-width: 4 !important;
   stroke-opacity: 0.95 !important;
-  filter:
-    drop-shadow(0 0 6px rgba(255, 122, 0, 0.75))
-    drop-shadow(0 0 14px rgba(255, 122, 0, 0.55));
-  animation: graPolygonGlow 1.8s ease-in-out infinite;
 }
 
 .gra-planned-outage {
@@ -25,142 +22,125 @@ body {
   stroke-opacity: 0.85 !important;
 }
 
-@keyframes graPolygonGlow {
-  0% {
-    fill-opacity: 0.06;
-    stroke-opacity: 0.60;
-    filter:
-      drop-shadow(0 0 4px rgba(255, 122, 0, 0.45))
-      drop-shadow(0 0 9px rgba(255, 122, 0, 0.25));
-  }
+/* CLUSTERS */
 
-  50% {
-    fill-opacity: 0.16;
-    stroke-opacity: 1;
-    filter:
-      drop-shadow(0 0 10px rgba(255, 122, 0, 1))
-      drop-shadow(0 0 24px rgba(255, 122, 0, 0.80));
-  }
-
-  100% {
-    fill-opacity: 0.06;
-    stroke-opacity: 0.60;
-    filter:
-      drop-shadow(0 0 4px rgba(255, 122, 0, 0.45))
-      drop-shadow(0 0 9px rgba(255, 122, 0, 0.25));
-  }
-}
-
-/* NUMBERED OUTAGE CLUSTERS */
 .gra-cluster {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 46px;
   height: 46px;
-  border: 4px solid #ffffff;
   border-radius: 50%;
-  color: #ffffff;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
-  font-family: Arial, sans-serif;
-  font-size: 15px;
+  color: white;
   font-weight: 800;
+  font-size: 15px;
+  border: 2px solid rgba(255,255,255,0.7);
+  backdrop-filter: blur(4px);
 }
 
 .gra-cluster-unplanned {
-  background: rgba(255, 122, 0, 0.88);
-  animation: graClusterGlow 1.7s ease-in-out infinite;
+  background: rgba(255,122,0,0.45);
+
+  animation: graClusterGlow 2s ease-in-out infinite;
+
+  box-shadow:
+    0 0 12px rgba(255,122,0,0.45),
+    0 0 22px rgba(255,122,0,0.30),
+    0 0 40px rgba(255,122,0,0.15);
 }
 
 .gra-cluster-planned {
-  background: #14245c;
+  background: rgba(20,36,92,0.75);
 }
 
 /* INDIVIDUAL OUTAGE MARKERS */
+
 .gra-outage-marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: 4px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+
+  border: 2px solid rgba(255,255,255,0.8);
 }
 
 .gra-outage-marker span {
-  display: block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #ffffff;
+  background: white;
 }
 
 .gra-outage-marker-planned {
-  background: #14245c;
+  background: rgba(20,36,92,0.85);
 }
 
 .gra-outage-marker-unplanned {
-  background: rgba(255, 122, 0, 0.88);
-  animation: graMarkerGlow 1.5s ease-in-out infinite;
+  background: rgba(255,122,0,0.35);
+
+  animation: graMarkerGlow 2s ease-in-out infinite;
+
+  box-shadow:
+    0 0 8px rgba(255,122,0,0.45),
+    0 0 18px rgba(255,122,0,0.25),
+    0 0 30px rgba(255,122,0,0.15);
 }
+
+/* ANIMATIONS */
 
 @keyframes graClusterGlow {
   0% {
-    transform: scale(0.94);
+    transform: scale(0.95);
+
     box-shadow:
-      0 0 0 0 rgba(255, 122, 0, 0.55),
-      0 0 10px rgba(255, 122, 0, 0.45),
-      0 3px 12px rgba(0, 0, 0, 0.35);
+      0 0 10px rgba(255,122,0,0.20),
+      0 0 18px rgba(255,122,0,0.10);
   }
 
   50% {
-    transform: scale(1.06);
+    transform: scale(1.10);
+
     box-shadow:
-      0 0 0 13px rgba(255, 122, 0, 0),
-      0 0 22px rgba(255, 122, 0, 0.90),
-      0 3px 12px rgba(0, 0, 0, 0.35);
+      0 0 22px rgba(255,122,0,0.70),
+      0 0 40px rgba(255,122,0,0.40),
+      0 0 70px rgba(255,122,0,0.15);
   }
 
   100% {
-    transform: scale(0.94);
+    transform: scale(0.95);
+
     box-shadow:
-      0 0 0 0 rgba(255, 122, 0, 0),
-      0 0 10px rgba(255, 122, 0, 0.45),
-      0 3px 12px rgba(0, 0, 0, 0.35);
+      0 0 10px rgba(255,122,0,0.20),
+      0 0 18px rgba(255,122,0,0.10);
   }
 }
 
 @keyframes graMarkerGlow {
   0% {
-    transform: scale(0.92);
+    transform: scale(0.95);
+
     box-shadow:
-      0 0 0 0 rgba(255, 122, 0, 0.60),
-      0 0 8px rgba(255, 122, 0, 0.45),
-      0 3px 10px rgba(0, 0, 0, 0.35);
+      0 0 8px rgba(255,122,0,0.20),
+      0 0 16px rgba(255,122,0,0.10);
   }
 
   50% {
-    transform: scale(1.10);
+    transform: scale(1.15);
+
     box-shadow:
-      0 0 0 11px rgba(255, 122, 0, 0),
-      0 0 18px rgba(255, 122, 0, 0.90),
-      0 3px 10px rgba(0, 0, 0, 0.35);
+      0 0 18px rgba(255,122,0,0.80),
+      0 0 35px rgba(255,122,0,0.45),
+      0 0 55px rgba(255,122,0,0.15);
   }
 
   100% {
-    transform: scale(0.92);
-    box-shadow:
-      0 0 0 0 rgba(255, 122, 0, 0),
-      0 0 8px rgba(255, 122, 0, 0.45),
-      0 3px 10px rgba(0, 0, 0, 0.35);
-  }
-}
+    transform: scale(0.95);
 
-@media (prefers-reduced-motion: reduce) {
-  .gra-unplanned-outage,
-  .gra-cluster-unplanned,
-  .gra-outage-marker-unplanned {
-    animation: none;
+    box-shadow:
+      0 0 8px rgba(255,122,0,0.20),
+      0 0 16px rgba(255,122,0,0.10);
   }
 }
