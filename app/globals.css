@@ -4,14 +4,19 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* OUTAGE POLYGONS */
+/* OUTAGE ZONES */
 
 .gra-unplanned-outage {
   fill: #ff7a00 !important;
-  fill-opacity: 0.10 !important;
+  fill-opacity: 0.28 !important;
   stroke: #ff7a00 !important;
-  stroke-width: 4 !important;
-  stroke-opacity: 0.95 !important;
+  stroke-width: 1 !important;
+  stroke-opacity: 0.03 !important;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 122, 0, 0.45))
+    drop-shadow(0 0 24px rgba(255, 122, 0, 0.25))
+    drop-shadow(0 0 40px rgba(255, 122, 0, 0.12));
+  animation: graPolygonGlow 2.5s ease-in-out infinite;
 }
 
 .gra-planned-outage {
@@ -22,7 +27,7 @@ body {
   stroke-opacity: 0.85 !important;
 }
 
-/* CLUSTERS */
+/* NUMBERED CLUSTERS */
 
 .gra-cluster {
   display: flex;
@@ -36,44 +41,39 @@ body {
   font-size: 15px;
   border: none;
   backdrop-filter: blur(4px);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .gra-cluster-unplanned {
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,122,0,0.95) 0%,
-      rgba(255,122,0,0.55) 35%,
-      rgba(255,122,0,0.20) 65%,
-      rgba(255,122,0,0.00) 100%
-    );
-
+  background: radial-gradient(
+    circle,
+    rgba(255, 122, 0, 0.95) 0%,
+    rgba(255, 122, 0, 0.55) 35%,
+    rgba(255, 122, 0, 0.20) 65%,
+    rgba(255, 122, 0, 0) 100%
+  );
   animation: graClusterGlow 2s ease-in-out infinite;
-
   box-shadow:
-    0 0 18px rgba(255,122,0,0.55),
-    0 0 35px rgba(255,122,0,0.35),
-    0 0 60px rgba(255,122,0,0.15);
+    0 0 18px rgba(255, 122, 0, 0.55),
+    0 0 35px rgba(255, 122, 0, 0.35),
+    0 0 60px rgba(255, 122, 0, 0.15);
 }
 
 .gra-cluster-planned {
-  background: rgba(20,36,92,0.75);
+  background: rgba(20, 36, 92, 0.75);
 }
 
-/* INDIVIDUAL OUTAGE MARKERS */
+/* INDIVIDUAL MARKERS WHEN ZOOMED IN */
 
 .gra-outage-marker {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .gra-outage-marker span {
@@ -84,79 +84,102 @@ body {
 }
 
 .gra-outage-marker-planned {
-  background: rgba(20,36,92,0.85);
+  background: rgba(20, 36, 92, 0.85);
 }
 
 .gra-outage-marker-unplanned {
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,122,0,1) 0%,
-      rgba(255,122,0,0.60) 40%,
-      rgba(255,122,0,0.20) 70%,
-      rgba(255,122,0,0.00) 100%
-    );
-
+  background: radial-gradient(
+    circle,
+    rgba(255, 122, 0, 1) 0%,
+    rgba(255, 122, 0, 0.60) 40%,
+    rgba(255, 122, 0, 0.20) 70%,
+    rgba(255, 122, 0, 0) 100%
+  );
   animation: graMarkerGlow 2s ease-in-out infinite;
-
   box-shadow:
-    0 0 14px rgba(255,122,0,0.60),
-    0 0 28px rgba(255,122,0,0.35),
-    0 0 45px rgba(255,122,0,0.15);
+    0 0 14px rgba(255, 122, 0, 0.60),
+    0 0 28px rgba(255, 122, 0, 0.35),
+    0 0 45px rgba(255, 122, 0, 0.15);
 }
 
 /* ANIMATIONS */
 
+@keyframes graPolygonGlow {
+  0% {
+    fill-opacity: 0.22;
+    filter:
+      drop-shadow(0 0 8px rgba(255, 122, 0, 0.25))
+      drop-shadow(0 0 16px rgba(255, 122, 0, 0.15));
+  }
+
+  50% {
+    fill-opacity: 0.34;
+    filter:
+      drop-shadow(0 0 18px rgba(255, 122, 0, 0.65))
+      drop-shadow(0 0 35px rgba(255, 122, 0, 0.35))
+      drop-shadow(0 0 55px rgba(255, 122, 0, 0.12));
+  }
+
+  100% {
+    fill-opacity: 0.22;
+    filter:
+      drop-shadow(0 0 8px rgba(255, 122, 0, 0.25))
+      drop-shadow(0 0 16px rgba(255, 122, 0, 0.15));
+  }
+}
+
 @keyframes graClusterGlow {
   0% {
     transform: scale(0.95);
-
     box-shadow:
-      0 0 10px rgba(255,122,0,0.20),
-      0 0 18px rgba(255,122,0,0.10);
+      0 0 10px rgba(255, 122, 0, 0.20),
+      0 0 18px rgba(255, 122, 0, 0.10);
   }
 
   50% {
     transform: scale(1.10);
-
     box-shadow:
-      0 0 22px rgba(255,122,0,0.70),
-      0 0 40px rgba(255,122,0,0.40),
-      0 0 70px rgba(255,122,0,0.15);
+      0 0 22px rgba(255, 122, 0, 0.70),
+      0 0 40px rgba(255, 122, 0, 0.40),
+      0 0 70px rgba(255, 122, 0, 0.15);
   }
 
   100% {
     transform: scale(0.95);
-
     box-shadow:
-      0 0 10px rgba(255,122,0,0.20),
-      0 0 18px rgba(255,122,0,0.10);
+      0 0 10px rgba(255, 122, 0, 0.20),
+      0 0 18px rgba(255, 122, 0, 0.10);
   }
 }
 
 @keyframes graMarkerGlow {
   0% {
     transform: scale(0.95);
-
     box-shadow:
-      0 0 8px rgba(255,122,0,0.20),
-      0 0 16px rgba(255,122,0,0.10);
+      0 0 8px rgba(255, 122, 0, 0.20),
+      0 0 16px rgba(255, 122, 0, 0.10);
   }
 
   50% {
     transform: scale(1.15);
-
     box-shadow:
-      0 0 18px rgba(255,122,0,0.80),
-      0 0 35px rgba(255,122,0,0.45),
-      0 0 55px rgba(255,122,0,0.15);
+      0 0 18px rgba(255, 122, 0, 0.80),
+      0 0 35px rgba(255, 122, 0, 0.45),
+      0 0 55px rgba(255, 122, 0, 0.15);
   }
 
   100% {
     transform: scale(0.95);
-
     box-shadow:
-      0 0 8px rgba(255,122,0,0.20),
-      0 0 16px rgba(255,122,0,0.10);
+      0 0 8px rgba(255, 122, 0, 0.20),
+      0 0 16px rgba(255, 122, 0, 0.10);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gra-unplanned-outage,
+  .gra-cluster-unplanned,
+  .gra-outage-marker-unplanned {
+    animation: none;
   }
 }
