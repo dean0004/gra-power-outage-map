@@ -201,16 +201,6 @@ const customersAffected = outages.reduce(
           {error}
         </div>
       )}
-<div
-  style={{
-    position: "absolute",
-    top: "15px",
-    left: "90px",
-    zIndex: 1000,
-    display: "flex",
-    gap: "6px",
-    flexWrap: "nowrap",
-  }}
 
       <MapContainer
         center={[-37.9, 145.0]}
