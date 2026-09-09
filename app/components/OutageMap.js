@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import L from "leaflet";
 import {
   GeoJSON,
@@ -11,6 +10,7 @@ import {
   TileLayer,
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import MapViewReporter from "./MapViewReporter";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
@@ -116,64 +116,10 @@ function createClusterIcon(cluster) {
   });
 }
 
-export default function OutageMap() {
-  const [outages, setOutages] = useState([]);
-  const [error, setError] = useState("");
-  const unplannedCount = outages.filter(
-  (outage) => outage.planned !== true
-).length;
-
-const plannedCount = outages.filter(
-  (outage) => outage.planned === true
-).length;
-
-const customersAffected = outages.reduce(
-  (total, outage) =>
-    total + Number(outage.customers_off || 0),
-  0
-);
-
-  useEffect(() => {
-    let active = true;
-
-    async function loadOutages() {
-      try {
-        const response = await fetch("/api/outages?refresh=" + Date.now(), {
-          cache: "no-store",
-        });
-
-        if (!response.ok) {
-          throw new Error("Outage feed returned HTTP " + response.status);
-        }
-
-        const json = await response.json();
-        const liveOutages = Array.isArray(json?.data?.outages)
-          ? json.data.outages
-          : [];
-
-        if (active) {
-          setOutages(liveOutages);
-          setError("");
-        }
-      } catch (requestError) {
-        console.error(requestError);
-        if (active) {
-          setError(
-            "United Energy outage information is temporarily unavailable."
-          );
-        }
-      }
-    }
-
-    loadOutages();
-    const refreshTimer = window.setInterval(loadOutages, 10 * 60 * 1000);
-
-    return () => {
-      active = false;
-      window.clearInterval(refreshTimer);
-    };
-  }, []);
-
+export default function OutageMap({
+  outages = [],
+  onVisibleOutagesChange = () => {},
+}) {
   return (
     <div
       style={{
@@ -183,30 +129,20 @@ const customersAffected = outages.reduce(
         width: "100%",
       }}
     >
-      {error && (
-        <div
-          style={{
-            position: "absolute",
-            zIndex: 1200,
-            top: "12px",
-            left: "55px",
-            padding: "10px 14px",
-            borderRadius: "7px",
-            background: "#ffffff",
-            color: "#b42318",
-            boxShadow: "0 3px 12px rgba(0, 0, 0, 0.2)",
-            fontWeight: "bold",
-          }}
-        >
-          {error}
-        </div>
-      )}
-
       <MapContainer
         center={[-37.9, 145.0]}
         zoom={9}
-        style={{ height: "100%", minHeight: "650px", width: "100%" }}
+        style={{
+          height: "100%",
+          minHeight: "650px",
+          width: "100%",
+        }}
       >
+        <MapViewReporter
+          outages={outages}
+          onChange={onVisibleOutagesChange}
+        />
+
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street Map">
             <TileLayer
@@ -237,7 +173,7 @@ const customersAffected = outages.reduce(
               style={{
                 color: outage.planned ? "#14245c" : "#c2410c",
                 fillColor: outage.planned ? "#2563eb" : "#f97316",
-                fillOpacity: outage.planned ? 0.10 : 0.28,
+                fillOpacity: outage.planned ? 0.1 : 0.28,
                 opacity: 0.9,
                 weight: 1,
                 className: outage.planned
@@ -268,7 +204,12 @@ const customersAffected = outages.reduce(
                 icon={createOutageIcon(outage)}
               >
                 <Popup>
-                  <div style={{ minWidth: "220px", fontFamily: "Arial, sans-serif" }}>
+                  <div
+                    style={{
+                      minWidth: "220px",
+                      fontFamily: "Arial, sans-serif",
+                    }}
+                  >
                     <strong
                       style={{
                         display: "block",
