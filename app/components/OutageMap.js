@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import MapViewReporter from "./MapViewReporter";
+import OutageSelectionController from "./OutageSelectionController";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
@@ -119,6 +120,7 @@ function createClusterIcon(cluster) {
 export default function OutageMap({
   outages = [],
   onVisibleOutagesChange = () => {},
+  selectedOutageKey = null,
 }) {
   return (
     <div
@@ -141,6 +143,10 @@ export default function OutageMap({
         <MapViewReporter
           outages={outages}
           onChange={onVisibleOutagesChange}
+        />
+        <OutageSelectionController
+          outages={outages}
+          selectedOutageKey={selectedOutageKey}
         />
 
         <LayersControl position="topright">
