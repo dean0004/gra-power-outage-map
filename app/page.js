@@ -48,9 +48,81 @@ export default function Home() {
           height: "calc(100vh - 110px)",
         }}
       >
-        <div>
-          <OutageMap />
-        </div>
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+  }}
+>
+  <div
+    style={{
+      padding: "10px",
+      background: "#ffffff",
+      borderBottom: "1px solid #ddd",
+    }}
+  >
+    <input
+      placeholder="Search suburb or postcode..."
+      style={{
+        width: "100%",
+        padding: "12px 15px",
+        borderRadius: "8px",
+        border: "1px solid #ccc",
+        fontSize: "14px",
+      }}
+    />
+
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        marginTop: "10px",
+      }}
+    >
+      <div
+        style={{
+          background: "#fff",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          border: "1px solid #ddd",
+        }}
+      >
+        UNP
+      </div>
+
+      <div
+        style={{
+          background: "#fff",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          border: "1px solid #ddd",
+        }}
+      >
+        PLN
+      </div>
+
+      <div
+        style={{
+          background: "#fff",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          border: "1px solid #ddd",
+        }}
+      >
+        CUSTOMERS
+      </div>
+    </div>
+  </div>
+
+  <div
+    style={{
+      flex: 1,
+    }}
+  >
+    <OutageMap />
+  </div>
+</div>
 
         <div
           style={{
