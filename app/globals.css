@@ -4,41 +4,54 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* LIVE OUTAGE POLYGONS */
 .gra-unplanned-outage {
-  fill: #ff6600 !important;
-  stroke: #c2410c !important;
-  stroke-width: 3;
+  fill: #ff7a00 !important;
+  fill-opacity: 0.10 !important;
+  stroke: #ff7a00 !important;
+  stroke-width: 4 !important;
+  stroke-opacity: 0.95 !important;
+  filter:
+    drop-shadow(0 0 6px rgba(255, 122, 0, 0.75))
+    drop-shadow(0 0 14px rgba(255, 122, 0, 0.55));
+  animation: graPolygonGlow 1.8s ease-in-out infinite;
 }
 
 .gra-planned-outage {
-  fill: #14245c !important;
+  fill: #2563eb !important;
+  fill-opacity: 0.10 !important;
   stroke: #14245c !important;
-  stroke-width: 3;
+  stroke-width: 3 !important;
+  stroke-opacity: 0.85 !important;
 }
 
-@keyframes graPulse {
+@keyframes graPolygonGlow {
   0% {
-    fill-opacity: 0.15;
-    stroke-opacity: 0.5;
+    fill-opacity: 0.06;
+    stroke-opacity: 0.60;
+    filter:
+      drop-shadow(0 0 4px rgba(255, 122, 0, 0.45))
+      drop-shadow(0 0 9px rgba(255, 122, 0, 0.25));
   }
 
   50% {
-    fill-opacity: 0.75;
+    fill-opacity: 0.16;
     stroke-opacity: 1;
+    filter:
+      drop-shadow(0 0 10px rgba(255, 122, 0, 1))
+      drop-shadow(0 0 24px rgba(255, 122, 0, 0.80));
   }
 
   100% {
-    fill-opacity: 0.15;
-    stroke-opacity: 0.5;
+    fill-opacity: 0.06;
+    stroke-opacity: 0.60;
+    filter:
+      drop-shadow(0 0 4px rgba(255, 122, 0, 0.45))
+      drop-shadow(0 0 9px rgba(255, 122, 0, 0.25));
   }
 }
 
-svg .gra-unplanned-outage {
-  animation: graPulse 1.5s ease-in-out infinite;
-}
-
-/* CLUSTER STYLING */
-
+/* NUMBERED OUTAGE CLUSTERS */
 .gra-cluster {
   display: flex;
   align-items: center;
@@ -55,14 +68,15 @@ svg .gra-unplanned-outage {
 }
 
 .gra-cluster-unplanned {
-  background: #f97316;
-  animation: graClusterPulse 1.7s ease-in-out infinite;
+  background: rgba(255, 122, 0, 0.88);
+  animation: graClusterGlow 1.7s ease-in-out infinite;
 }
 
 .gra-cluster-planned {
   background: #14245c;
 }
 
+/* INDIVIDUAL OUTAGE MARKERS */
 .gra-outage-marker {
   display: flex;
   align-items: center;
@@ -87,52 +101,66 @@ svg .gra-unplanned-outage {
 }
 
 .gra-outage-marker-unplanned {
-  background: #f97316;
-  animation: graMarkerPulse 1.5s ease-in-out infinite;
+  background: rgba(255, 122, 0, 0.88);
+  animation: graMarkerGlow 1.5s ease-in-out infinite;
 }
 
-@keyframes graClusterPulse {
+@keyframes graClusterGlow {
   0% {
-    transform: scale(0.92);
+    transform: scale(0.94);
     box-shadow:
-      0 0 0 0 rgba(249, 115, 22, 0.55),
+      0 0 0 0 rgba(255, 122, 0, 0.55),
+      0 0 10px rgba(255, 122, 0, 0.45),
       0 3px 12px rgba(0, 0, 0, 0.35);
   }
 
   50% {
     transform: scale(1.06);
     box-shadow:
-      0 0 0 12px rgba(249, 115, 22, 0),
+      0 0 0 13px rgba(255, 122, 0, 0),
+      0 0 22px rgba(255, 122, 0, 0.90),
       0 3px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  100% {
+    transform: scale(0.94);
+    box-shadow:
+      0 0 0 0 rgba(255, 122, 0, 0),
+      0 0 10px rgba(255, 122, 0, 0.45),
+      0 3px 12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@keyframes graMarkerGlow {
+  0% {
+    transform: scale(0.92);
+    box-shadow:
+      0 0 0 0 rgba(255, 122, 0, 0.60),
+      0 0 8px rgba(255, 122, 0, 0.45),
+      0 3px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  50% {
+    transform: scale(1.10);
+    box-shadow:
+      0 0 0 11px rgba(255, 122, 0, 0),
+      0 0 18px rgba(255, 122, 0, 0.90),
+      0 3px 10px rgba(0, 0, 0, 0.35);
   }
 
   100% {
     transform: scale(0.92);
     box-shadow:
-      0 0 0 0 rgba(249, 115, 22, 0),
-      0 3px 12px rgba(0, 0, 0, 0.35);
+      0 0 0 0 rgba(255, 122, 0, 0),
+      0 0 8px rgba(255, 122, 0, 0.45),
+      0 3px 10px rgba(0, 0, 0, 0.35);
   }
 }
 
-@keyframes graMarkerPulse {
-  0% {
-    transform: scale(0.9);
-    box-shadow:
-      0 0 0 0 rgba(249, 115, 22, 0.6),
-      0 3px 10px rgba(0, 0, 0, 0.35);
-  }
-
-  50% {
-    transform: scale(1.1);
-    box-shadow:
-      0 0 0 10px rgba(249, 115, 22, 0),
-      0 3px 10px rgba(0, 0, 0, 0.35);
-  }
-
-  100% {
-    transform: scale(0.9);
-    box-shadow:
-      0 0 0 0 rgba(249, 115, 22, 0),
-      0 3px 10px rgba(0, 0, 0, 0.35);
+@media (prefers-reduced-motion: reduce) {
+  .gra-unplanned-outage,
+  .gra-cluster-unplanned,
+  .gra-outage-marker-unplanned {
+    animation: none;
   }
 }
