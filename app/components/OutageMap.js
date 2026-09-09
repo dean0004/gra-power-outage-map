@@ -76,18 +76,21 @@ export default function OutageMap() {
                 geometry: outage.geometry,
                 properties: {},
               }}
-              style={{
-                color: outage.planned
-                  ? "#14245c"
-                  : "#ff6600",
-                fillColor: outage.planned
-                  ? "#14245c"
-                  : "#ff6600",
-                fillOpacity: outage.planned
-                  ? 0.25
-                  : 0.55,
-                weight: 3,
-              }}
+style={{
+  color: outage.planned
+    ? "#14245c"
+    : "#ff6600",
+  fillColor: outage.planned
+    ? "#14245c"
+    : "#ff6600",
+  fillOpacity: outage.planned
+    ? 0.25
+    : 0.55,
+  weight: 3,
+  className: outage.planned
+    ? "gra-planned-outage"
+    : "gra-unplanned-outage",
+}}
             />
           );
         })}
