@@ -1,54 +1,51 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 const OutageMap = dynamic(
   () => import("./components/OutageMap"),
-  { ssr: false }
+  {
+    ssr: false,
+  }
 );
 
-const outages = [
-  {
-    suburb: "Melbourne CBD",
-    customers: 142,
-    type: "Unplanned"
-  },
-  {
-    suburb: "Richmond",
-    customers: 53,
-    type: "Planned"
-  },
-  {
-    suburb: "Essendon",
-    customers: 88,
-    type: "Unplanned"
-  },
-  {
-    suburb: "Dandenong",
-    customers: 201,
-    type: "Planned"
-  }
-];
-
 export default function Home() {
+  const [feed, setFeed] = useState(null);
+
+  useEffect(() => {
+    async function load() {
+      const response = await fetch("/api/outages");
+
+      const json = await response.json();
+
+      setFeed(json);
+    }
+
+    load();
+  }, []);
+
+  const outages = feed?.data?.outages || [];
+
   return (
     <main>
       <div
         style={{
           background: "#711f32",
           color: "white",
-          padding: "30px"
+          padding: "30px",
         }}
       >
         <h1>Generator Rental Australia</h1>
+
         <p>Victoria Power Outage Map</p>
       </div>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 350px",
-          height: "calc(100vh - 110px)"
+          gridTemplateColumns: "1fr 400px",
+          height: "calc(100vh - 110px)",
         }}
       >
         <div>
@@ -60,10 +57,12 @@ export default function Home() {
             overflowY: "auto",
             borderLeft: "1px solid #ddd",
             padding: "20px",
-            background: "#fafafa"
+            background: "#fafafa",
           }}
         >
-          <h3>Current Outages ({outages.length})</h3>
+          <h3>
+            United Energy Outages ({outages.length})
+          </h3>
 
           {outages.map((outage, index) => (
             <div
@@ -73,38 +72,36 @@ export default function Home() {
                 border: "1px solid #ddd",
                 padding: "15px",
                 marginBottom: "10px",
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
             >
-              <strong>{outage.suburb}</strong>
+              <strong>
+                {(outage.suburbs || []).join(", ")}
+              </strong>
 
-              <p
-                style={{
-                  margin: "5px 0"
-                }}
-              >
-                {outage.type}
+              <p>
+                {outage.planned
+                  ? "Planned Outage"
+                  : "Unplanned Outage"}
               </p>
 
-              <p
-                style={{
-                  margin: "5px 0"
-                }}
-              >
-                Customers affected: {outage.customers}
+              <p>
+                Customers affected:
+                {" "}
+                {outage.customers_off}
               </p>
 
-              <button
-                style={{
-                  background: "#711f32",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 12px",
-                  cursor: "pointer"
-                }}
-              >
-                Request Generator
-              </button>
+              <p>
+                Cause:
+                {" "}
+                {outage.cause}
+              </p>
+
+              <p>
+                Postcodes:
+                {" "}
+                {(outage.postcodes || []).join(", ")}
+              </p>
             </div>
           ))}
         </div>
