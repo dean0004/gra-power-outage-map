@@ -34,19 +34,27 @@ body {
   color: white;
   font-weight: 800;
   font-size: 15px;
-  border: 2px solid rgba(255,255,255,0.7);
+  border: none;
   backdrop-filter: blur(4px);
+  overflow: hidden;
 }
 
 .gra-cluster-unplanned {
-  background: rgba(255,122,0,0.45);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,122,0,0.95) 0%,
+      rgba(255,122,0,0.55) 35%,
+      rgba(255,122,0,0.20) 65%,
+      rgba(255,122,0,0.00) 100%
+    );
 
   animation: graClusterGlow 2s ease-in-out infinite;
 
   box-shadow:
-    0 0 12px rgba(255,122,0,0.45),
-    0 0 22px rgba(255,122,0,0.30),
-    0 0 40px rgba(255,122,0,0.15);
+    0 0 18px rgba(255,122,0,0.55),
+    0 0 35px rgba(255,122,0,0.35),
+    0 0 60px rgba(255,122,0,0.15);
 }
 
 .gra-cluster-planned {
@@ -64,12 +72,13 @@ body {
   align-items: center;
   justify-content: center;
 
-  border: 2px solid rgba(255,255,255,0.8);
+  border: none;
+  overflow: hidden;
 }
 
 .gra-outage-marker span {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: white;
 }
@@ -79,14 +88,21 @@ body {
 }
 
 .gra-outage-marker-unplanned {
-  background: rgba(255,122,0,0.35);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,122,0,1) 0%,
+      rgba(255,122,0,0.60) 40%,
+      rgba(255,122,0,0.20) 70%,
+      rgba(255,122,0,0.00) 100%
+    );
 
   animation: graMarkerGlow 2s ease-in-out infinite;
 
   box-shadow:
-    0 0 8px rgba(255,122,0,0.45),
-    0 0 18px rgba(255,122,0,0.25),
-    0 0 30px rgba(255,122,0,0.15);
+    0 0 14px rgba(255,122,0,0.60),
+    0 0 28px rgba(255,122,0,0.35),
+    0 0 45px rgba(255,122,0,0.15);
 }
 
 /* ANIMATIONS */
