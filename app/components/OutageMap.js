@@ -205,34 +205,35 @@ const customersAffected = outages.reduce(
   style={{
     position: "absolute",
     top: "15px",
-    left: "15px",
+    left: "90px",
     zIndex: 1000,
     display: "flex",
-    gap: "12px",
-    flexWrap: "wrap",
+    gap: "6px",
+    flexWrap: "nowrap",
   }}
 >
   <div
     style={{
       background: "rgba(255,255,255,0.95)",
-      padding: "12px 18px",
-      borderRadius: "12px",
-      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-      minWidth: "150px",
+      padding: "6px 10px",
+      borderRadius: "8px",
+      boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+      minWidth: "90px",
     }}
   >
     <div
       style={{
-        fontSize: "12px",
+        fontSize: "9px",
         color: "#666",
+        fontWeight: "600",
       }}
     >
-      UNPLANNED OUTAGES
+      UNPLANNED
     </div>
 
     <div
       style={{
-        fontSize: "32px",
+        fontSize: "18px",
         fontWeight: "bold",
         color: "#ff7a00",
       }}
@@ -244,24 +245,25 @@ const customersAffected = outages.reduce(
   <div
     style={{
       background: "rgba(255,255,255,0.95)",
-      padding: "12px 18px",
-      borderRadius: "12px",
-      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-      minWidth: "150px",
+      padding: "6px 10px",
+      borderRadius: "8px",
+      boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+      minWidth: "90px",
     }}
   >
     <div
       style={{
-        fontSize: "12px",
+        fontSize: "9px",
         color: "#666",
+        fontWeight: "600",
       }}
     >
-      PLANNED OUTAGES
+      PLANNED
     </div>
 
     <div
       style={{
-        fontSize: "32px",
+        fontSize: "18px",
         fontWeight: "bold",
         color: "#14245c",
       }}
@@ -273,24 +275,25 @@ const customersAffected = outages.reduce(
   <div
     style={{
       background: "rgba(255,255,255,0.95)",
-      padding: "12px 18px",
-      borderRadius: "12px",
-      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-      minWidth: "220px",
+      padding: "6px 10px",
+      borderRadius: "8px",
+      boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+      minWidth: "130px",
     }}
   >
     <div
       style={{
-        fontSize: "12px",
+        fontSize: "9px",
         color: "#666",
+        fontWeight: "600",
       }}
     >
-      CUSTOMERS AFFECTED
+      CUSTOMERS OFF
     </div>
 
     <div
       style={{
-        fontSize: "32px",
+        fontSize: "18px",
         fontWeight: "bold",
         color: "#711f32",
       }}
