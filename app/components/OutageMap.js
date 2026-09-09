@@ -119,6 +119,19 @@ function createClusterIcon(cluster) {
 export default function OutageMap() {
   const [outages, setOutages] = useState([]);
   const [error, setError] = useState("");
+  const unplannedCount = outages.filter(
+  (outage) => outage.planned !== true
+).length;
+
+const plannedCount = outages.filter(
+  (outage) => outage.planned === true
+).length;
+
+const customersAffected = outages.reduce(
+  (total, outage) =>
+    total + Number(outage.customers_off || 0),
+  0
+);
 
   useEffect(() => {
     let active = true;
@@ -188,7 +201,104 @@ export default function OutageMap() {
           {error}
         </div>
       )}
+<div
+  style={{
+    position: "absolute",
+    top: "15px",
+    left: "15px",
+    zIndex: 1000,
+    display: "flex",
+    gap: "12px",
+    flexWrap: "wrap",
+  }}
+>
+  <div
+    style={{
+      background: "rgba(255,255,255,0.95)",
+      padding: "12px 18px",
+      borderRadius: "12px",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+      minWidth: "150px",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "12px",
+        color: "#666",
+      }}
+    >
+      UNPLANNED OUTAGES
+    </div>
 
+    <div
+      style={{
+        fontSize: "32px",
+        fontWeight: "bold",
+        color: "#ff7a00",
+      }}
+    >
+      {unplannedCount}
+    </div>
+  </div>
+
+  <div
+    style={{
+      background: "rgba(255,255,255,0.95)",
+      padding: "12px 18px",
+      borderRadius: "12px",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+      minWidth: "150px",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "12px",
+        color: "#666",
+      }}
+    >
+      PLANNED OUTAGES
+    </div>
+
+    <div
+      style={{
+        fontSize: "32px",
+        fontWeight: "bold",
+        color: "#14245c",
+      }}
+    >
+      {plannedCount}
+    </div>
+  </div>
+
+  <div
+    style={{
+      background: "rgba(255,255,255,0.95)",
+      padding: "12px 18px",
+      borderRadius: "12px",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+      minWidth: "220px",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "12px",
+        color: "#666",
+      }}
+    >
+      CUSTOMERS AFFECTED
+    </div>
+
+    <div
+      style={{
+        fontSize: "32px",
+        fontWeight: "bold",
+        color: "#711f32",
+      }}
+    >
+      {customersAffected.toLocaleString()}
+    </div>
+  </div>
+</div>
       <MapContainer
         center={[-37.9, 145.0]}
         zoom={9}
@@ -224,9 +334,9 @@ export default function OutageMap() {
               style={{
                 color: outage.planned ? "#14245c" : "#c2410c",
                 fillColor: outage.planned ? "#2563eb" : "#f97316",
-                fillOpacity: outage.planned ? 0.18 : 0.45,
+                fillOpacity: outage.planned ? 0.10 : 0.28,
                 opacity: 0.9,
-                weight: 3,
+                weight: 1,
                 className: outage.planned
                   ? "gra-planned-outage"
                   : "gra-unplanned-outage",
